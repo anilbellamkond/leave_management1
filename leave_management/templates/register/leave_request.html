@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+{%load static%}
+<html>
+<head>
+  <link rel="stylesheet" type="text/css" href="{%static 'leave_request.css'%}">
+</head>
+<body>
+  
+  <div class="navbar">
+    <div class="logo">
+      <img src="{%static 'images/Prime Minds.png'%}"/> 
+      <h3>Prime Minds</h3>
+    </div>
+
+    <div class="profile">
+      <p>Hi,{{employ_detail.full_name}}</p>&nbsp;
+    </div>
+  </div>
+  
+  <div class="sidebar">
+    
+    <a href="#">Apply Leave</a>
+    <a href="{% url 'leave_history' employ_detail.id  %}">Leave History</a>
+  
+ 
+    <a  href="{% url 'signout'%}">Logout</a>
+  
+  </div>
+  
+  <div class="content">
+    <div class="form-container">
+        <form  method="POST" enctype="multipart/form-data">
+            {%csrf_token%}
+          <h1>Leave Request Form</h1>
+
+    <input type="text" name="employee_name" placeholder="Employee Name">
+    <select name="leave_type" placeholder="Leave Type">
+      <option value="Casual Leave">Casual Leave</option>
+      <option value="Sick Leave">Sick Leave</option>
+      <option value="Emergency Leave">Emergency Leave</option>
+    </select>
+    <input type="date" name="from_date">
+    <input type="date" name="to_date">
+    <textarea name="reason" placeholder="Reason for leave"></textarea>
+    <input type="file" name="file" >
+    <input type="submit" value="Submit">
+
+        {%csrf_token%}
+    </form>
+</div>
+  </div>
+  
+  
+  
+  <script src="{%static 'leave_request.js' %}"></script>
+</body>
+</html>

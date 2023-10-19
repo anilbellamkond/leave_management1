@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+{%load static%}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="{%static 'login.css'%}">
+    <title>Login Form</title>
+</head>
+<body>
+ <div class="container">
+      <div class="container2">
+        <h1 class="heading">Welcome to Prime Minds</h1>
+        <div class="logo">
+            <img class="img" src="{%static 'images/Prime Minds.png'%}" alt="Prime Minds" id="logo">
+        </div>
+        <div class="quotation">
+            <p id="quote">"Your Success is Our Priority"</p>
+        </div>
+    </div>
+
+
+
+      
+
+         
+        <div class="login-form">
+            <form method="POST">
+                {%csrf_token%}
+            <h2>Login</h2>
+            <input class="inputs" name="email" type="email" placeholder="Email" id="employee_id" required />
+            <input class="inputs" name="password" type="password" placeholder="Password" id="password" required />
+            <button type="submit">Login</button>
+            
+        </form>
+    </div>
+
+</div>
+
+    <script src="{%static 'login.js'%}"></script>
+</body>
+</html>

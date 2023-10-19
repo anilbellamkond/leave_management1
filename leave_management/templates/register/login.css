@@ -1,0 +1,88 @@
+.login-form {
+    width: 300px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+  }
+  .container {
+    background-image:url("https://images.unsplash.com/photo-1617791160536-598cf32026fb?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1964&q=80");
+    background-size: cover;
+    appearance:no repeat;
+    height:100vh;
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items:center;
+  }
+.login-form  h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color:whitesmoke;
+    font-family: Arial, Helvetica, sans-serif ;
+  }
+  
+.login-form input {
+    width:93%;
+    margin-bottom: 10px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+  }
+  
+  .login-form button {
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: white;
+    border: 1px solid #007bff;
+    border-radius: 3px;
+    cursor: pointer;
+  }
+  
+  .login-form button:hover {
+    background-color: #0069d9;
+  }
+  .container2 {
+      width:800px;
+      height:300px;
+      border-width:0px;
+      text-align: center;
+  }
+  
+  
+
+.logo {
+    animation: dance 2s infinite;
+}
+
+@keyframes dance {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-10px); }
+    100% { transform: translateY(0); }
+}
+
+#logo {
+    width: 200px; /* Adjust the size as needed */
+}
+
+.quotation {
+    margin-top: 20px;
+}
+
+.img {
+    height:100px;
+    width:150px;
+    
+}
+
+#quote {
+    font-size: 32px;
+    font-style: italic;
+    color:white;
+}
+.heading {
+    font-size: 42px;
+    font-style: italic;
+    color:white;
+}
