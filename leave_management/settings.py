@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/4.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.2/ref/settings/
 """
+import os
 
 from pathlib import Path
 
@@ -17,6 +18,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 temp_path = BASE_DIR/'leave_management\\templates'
 
 static_path  = BASE_DIR/'leave_management\\templates\\register'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
@@ -128,3 +133,10 @@ STATICFILES_DIRS = [static_path]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'custom_user.User'
+
+EMAIL_BACKEND = "django.core.mail.backends.smtp.EmailBackend"
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587 
+EMAIL_HOST_USER = 'abellamkonda513@gmail.com'
+EMAIL_HOST_PASSWORD = 'wfsg qsal pxnn qvyx'

@@ -1,0 +1,62 @@
+{% extends 'register/baseadmin.html/' %} 
+
+{% block custom_nav %}
+<div class="employee-name">
+    Hi,&nbsp; {{employ_detail.full_name}}   &nbsp;
+    
+</div>
+
+{% endblock %}
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-body">
+            <form method="POST"> 
+                {%csrf_token%}
+                <p class="form-group">
+                    <label for="employee_name">Full Name:</label>
+                    <input type="text" class="form-control" id="employee_name" name="{{ record_details.full_name }}" value="{{ record_details.full_name }}" readonly placeholder="Employee Name">
+                </p>
+                <p class="form-group">
+                    <label for="leave_type">Leave Type:</label>
+                    <select class="form-control" id="leave_type" name="leave_type" disabled>
+                        <option value="Casual Leave" {% if record_details.leave_type == "Casual Leave" %}selected{% endif %}>Casual Leave</option>
+                        <option value="Sick Leave" {% if record_details.leave_type == "Sick Leave" %}selected{% endif %}>Sick Leave</option>
+                        <option value="Emergency Leave" {% if record_details.leave_type == "Emergency Leave" %}selected{% endif %}>Emergency Leave</option>
+                    </select>
+                </p>
+                <p class="form-group">
+                    <label for="from_date">Start Date:</label>
+                    <input type="date" class="form-control" id="from_date" value="{{ record_details.start_date|date:'Y-m-d' }}" name="from_date" readonly>
+                </p>
+                <p class="form-group">
+                    <label for="to_date">End Date:</label>
+                    <input type="date" class="form-control" id="to_date" value="{{ record_details.end_date|date:'Y-m-d' }}" name="to_date" readonly>
+                </p>
+                <p class="form-group">
+                    <label for="reason">Reason:</label>
+                    <textarea class="form-control" id="reason" name="reason" readonly placeholder="Reason for leave">{{ record_details.reason }}</textarea>
+                </p>
+                
+                <div class="btn-group">
+                    <label for="status">Status: &nbsp</label>
+                    <select class="form-control" id="status" name="status">
+                        <option value="TakeAction">Take Action</option>
+                        <option value="Approve">Approve</option>
+                        <option value="Reject">Reject</option>
+                    </select>
+                </div>
+                <br/>
+                <br/>
+               <button type="submit" class="btn btn-outline-success">Submit</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

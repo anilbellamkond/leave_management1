@@ -25,5 +25,9 @@ urlpatterns = [
     path('signout/',user_logout,name='signout'),
     path('leave_history/<int:pk>',leave_history,name="leave_history"),
     path('leave_request/<int:pk>',leave_request,name="leave_request"),
-    
+    path('admins/<int:id>',admins,name='admins'),
+    path('prequest/',pending_request,name='prequest'),
+     path('arequest/',approved_request,name='arequest'),
+      path('Rrequest/',rejected_request,name='Rrequest'),
+    path('view_update/<int:id>',view_record_update_status,name='view_update')
 ]

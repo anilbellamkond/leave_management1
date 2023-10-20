@@ -1,37 +1,5 @@
 /* styles.css */
-body {
-    font-family: sans-serif;
-  }
-  
-  form {
-    margin: 0 auto;
-    width: 500px;
-  }
 
-  .form-container {
-    background-color: #f5f5f5;
-    padding: 20px;
-  }
-  
-  input,
-  select,
-  textarea {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-  }
-  
-  textarea {
-    height: 200px;
-  }
-  
-  input[type="submit"] {
-    background-color: #000;
-    color: #fff;
-    cursor: pointer;
-  }
-  
   .error {
     color: red;
   }

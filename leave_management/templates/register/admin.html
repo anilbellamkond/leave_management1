@@ -1,0 +1,40 @@
+{% extends 'register/baseadmin.html/' %} 
+
+{% block custom_nav %}
+<div class="employee-name">
+    Hi,&nbsp; {{employ_detail.full_name}}   &nbsp;
+</div>
+
+{% endblock %}
+{% block content %}
+
+<div class="d-flex flex-column justify-content-center mt-5">
+       <div class="d-flex flex-row justify-content-center">
+       
+        <div class="card text-center m-3 bg-" style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Pending Requests</h5>
+              <h2 class="card-text">{{p}}</h2>
+              <a href="{% url 'prequest' %}" class="btn btn-primary" >Pending Requests</a>
+            </div>
+          </div>
+
+          <div class="card text-center m-3 " style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Approved Requests</h5>
+              <h2 class="card-text">{{a}}</h2>
+              <a href="{% url 'arequest' %}" class="btn btn-success">Approved Requests</a>
+            </div>
+          </div>
+
+          <div class="card text-center m-3  " style="width: 18rem;">
+            <div class="card-body">
+              <h5 class="card-title">Rejected Requests</h5>
+              <h2 class="card-text">{{r}}</h2>
+              <a href="{% url 'Rrequest' %}" class="btn btn-primary">Rejected Requests</a>
+            </div>
+          </div>
+
+        </div>
+    </div>
+{% endblock %}

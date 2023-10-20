@@ -5,7 +5,7 @@
   <link rel="stylesheet" type="text/css" href="{%static 'employ.css'%}"> 
   <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/flatly/bootstrap.min.css">
 
-        <link rel="stylesheet" type="text/css" href="{% static 'css/styles.css' %}">
+        
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
@@ -74,7 +74,16 @@
               <td> {{record.start_date}} </td>
               <td> {{record.end_date}} </td>
               <td> {{record.reason}} </td>
-              <td> {{record.status}} </td>
+
+              <td> {% if record.status == "Rejected" %}
+                <span style="color:red; font-weight: bold;">{{ record.status }}</span>
+            {% elif record.status == "Approved" %}
+                <span style="color:green; font-weight: bold;">{{ record.status }}</span>
+            {% else %}
+                <span style="color:orange; font-weight: bold;">{{ record.status }}</span>
+            {% endif %}
+                 </td>
+
               <td> {{record.created_at}} </td>
 
               <td> {{record.updated_at}} </td>

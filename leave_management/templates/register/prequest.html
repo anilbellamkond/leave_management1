@@ -1,0 +1,75 @@
+{% extends 'register/baseadmin.html/' %} 
+
+{% block custom_nav %}
+<div class="employee-name">
+    Hi,&nbsp; {{employ_detail.full_name}}   &nbsp;
+    
+</div>
+
+{% endblock %}
+{% block content %}
+<div class='m-5'>
+    <h2>Pending Requests</h2>
+<table class="table table-hover table-bordered">
+
+      <thead class="table-light">
+
+          <tr>
+
+              <th scope="col"> ID </th>
+              <th scope="col"> Full name </th>
+              <th scope="col"> Leave Type </th>
+              <th scope="col"> Start Date </th>
+              <th scope="col"> End Date </th>
+              <th scope="col"> Reason </th>
+              <th scope="col"> Status </th>
+              <th scope="col"> Creation Date </th>
+              <th scope="col"> Updation Date </th>
+              <th scope="col"> View </th>
+          </tr>
+
+      </thead>
+
+      <tbody>
+
+      {% if pending_request %}
+
+          {% for record in pending_request %}
+
+          <tr>
+
+              <td> {{record.id}} </td>
+
+              <td> {{record.full_name}} </td>
+
+              <td> {{record.leave_type}} </td>
+
+              <td> {{record.start_date}} </td>
+              <td> {{record.end_date}} </td>
+              <td> {{record.reason}} </td>
+              <td> 
+                {% if record.status == "pending" %}
+        <span style="color:orange; font-weight: bold;">{{ record.status }}</span>
+    
+            {% endif %}
+                
+            </td>
+              <td> {{record.created_at}} </td>
+
+              <td> {{record.updated_at}} </td>
+      
+              <td> <a class="btn btn-success btn-sm " href="{% url 'view_update' record.id %}"> <i class="fa fa-eye " aria-hidden="true"></i> </a> </td>
+              
+          </tr>
+
+          {% endfor %}
+      
+      {% endif %}
+
+
+      </tbody>
+
+
+  </table>
+</div>
+{%endblock%}

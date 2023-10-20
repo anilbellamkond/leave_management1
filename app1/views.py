@@ -6,6 +6,32 @@ from django.views.decorators.csrf import csrf_exempt
 from . models import Employee,Leave_Request
 from django.http import HttpResponse
 from django.contrib import messages
+from django.core.mail import send_mail
+
+
+
+def view_record_update_status(request,id):
+    record_details = Leave_Request.objects.get(id=id)
+    if request.method == "POST":
+        status = request.POST.get('status')
+        if status == "Approve":
+           record_details.status = 'Approved'
+           record_details.save()
+           send_mail(
+                        "Leave Approved",
+               'Take a leave ',
+        'anilbellamkonda8@gmail.com',
+        [record_details.employee.email],
+        fail_silently=False,
+          )
+           
+        else :
+            record_details.status = 'Rejected'
+            record_details.save() 
+            
+    return render(request,'register/view_update.html',{'record_details':record_details})
+
+
 
 
 
@@ -19,11 +45,36 @@ def employee(request,id):
     return render(request,'register/employ.html',{'employ_detail':employ_detail})
 
 @login_required
-def admins(request):
-    return HttpResponse("welcome to admin page") 
+def admins(request,id):
+    pending_request = Leave_Request.objects.filter(status='pending')
+    approved_request = Leave_Request.objects.filter(status='Approved')
+    rejected_request = Leave_Request.objects.filter(status='Rejected')
+    a = approved_request.count() 
+    r = rejected_request.count()
+    p = pending_request.count()
+    employ_detail = Employee.objects.get(id=id)
+    return render(request,'register/admin.html/',{'employ_detail':employ_detail,'p':p,'a':a,'r':r})
+ 
+
+def pending_request(request):
+    pending_request = Leave_Request.objects.filter(status='pending')
+    employ_detail = Leave_Request.employee
+    return render(request,'register/prequest.html',{'pending_request':pending_request})
+
+def approved_request(request):
+    approved_request = Leave_Request.objects.filter(status='Approved').order_by('-created_at')
+    
+    return render(request,'register/arequest.html',{'approved_request':approved_request,}) 
+
+def rejected_request(request):
+    rejected_request = Leave_Request.objects.filter(status='Rejected').order_by('-created_at')
+    
+    return render(request,'register/Rrequest.html',{'rejected_request':rejected_request,})
 
 
 
+     
+@login_required
 def leave_request(request,pk):
     employ_detail = Employee.objects.get(id=pk) 
     id = employ_detail.id
@@ -58,9 +109,8 @@ def leave_request(request,pk):
 def leave_history(request,pk):
     employ_detail = Employee.objects.get(id=pk) 
 
-    leave_record = Leave_Request.objects.filter(employee=pk)
-    for i in leave_record:
-        print(i)
+    leave_record = Leave_Request.objects.filter(employee=pk).order_by('-created_at')
+    
     return render(request,'register/leave_history.html',{'pk':pk,'employ_detail':employ_detail,'leave_record':leave_record})
 
 
@@ -75,7 +125,8 @@ def logins(request):
         if user is not None:
             login(request,user)
             if user.is_superuser:
-                return admins(request)
+                employ_details = Employee.objects.get(email=email)
+                return admins(request,employ_details.id)
             else :
                 employ_details = Employee.objects.get(email=email)
                 return employee(request,employ_details.id)
