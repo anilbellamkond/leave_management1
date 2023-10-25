@@ -15,7 +15,7 @@
             <div class="card-body">
               <h5 class="card-title">Pending Requests</h5>
               <h2 class="card-text">{{p}}</h2>
-              <a href="{% url 'prequest' %}" class="btn btn-primary" >Pending Requests</a>
+              <a href="{% url 'prequest' employ_detail.id %}" class="btn btn-primary" >Pending Requests</a>
             </div>
           </div>
 
@@ -23,7 +23,7 @@
             <div class="card-body">
               <h5 class="card-title">Approved Requests</h5>
               <h2 class="card-text">{{a}}</h2>
-              <a href="{% url 'arequest' %}" class="btn btn-success">Approved Requests</a>
+              <a href="{% url 'arequest' employ_detail.id %}" class="btn btn-success">Approved Requests</a>
             </div>
           </div>
 
@@ -31,7 +31,7 @@
             <div class="card-body">
               <h5 class="card-title">Rejected Requests</h5>
               <h2 class="card-text">{{r}}</h2>
-              <a href="{% url 'Rrequest' %}" class="btn btn-primary">Rejected Requests</a>
+              <a href="{% url 'Rrequest' employ_detail.id %}" class="btn btn-primary">Rejected Requests</a>
             </div>
           </div>
 

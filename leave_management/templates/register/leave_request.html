@@ -73,7 +73,7 @@
 </head>
 <body>
   
-  <div class="navbar">
+  <div class="navbar" style="background-color:#A1045A;">
     <div class="logo">
       <img src="{%static 'images/Prime Minds.png'%}"/> 
       <h3>Prime Minds</h3>
@@ -84,7 +84,7 @@
     </div>
   </div>
   
-  <div class="sidebar">
+  <div class="sidebar" style="background-color:#A1045A;">
     
     <a href="#">Apply Leave</a>
     <a href="{% url 'leave_history' employ_detail.id  %}">Leave History</a>
@@ -105,9 +105,11 @@
       <option value="Casual Leave">Casual Leave</option>
       <option value="Sick Leave">Sick Leave</option>
       <option value="Emergency Leave">Emergency Leave</option>
-    </select>
-    <input type="date" name="from_date">
-    <input type="date" name="to_date">
+    </select> 
+    <div class="dates">
+    <input type="date" placeholder="start date" id= "from_date" name="from_date" > &nbsp; &nbsp;
+    <input type="date" name="to_date" id="to_date">
+  </div>
     <textarea name="reason" placeholder="Reason for leave"></textarea>
     <input type="file" name="file" >
     <input type="submit" value="Submit">

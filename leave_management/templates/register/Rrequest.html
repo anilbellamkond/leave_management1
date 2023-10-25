@@ -1,77 +1,54 @@
-{% extends 'register/baseadmin.html/' %} 
+{% extends 'register/baseadmin.html/' %}
 
 {% block custom_nav %}
-<div class="employee-name">
-    Hi,&nbsp; {{employ_detail.full_name}}   &nbsp;
-   
-</div>
-
+  <div class="employee-name">
+    Hi, {{employ_details.full_name}} &nbsp;
+  </div>
 {% endblock %}
+
 {% block content %}
-<div class='m-5'>
+  <div class='m-5'>
+    <a href="{% url 'admins' employ_details.id %}">Home</a>
     <h2>Rejected Requests</h2>
-<table class="table table-hover table-bordered">
-
+    <table class="table table-hover table-bordered">
       <thead class="table-light">
-
-          <tr>
-              <th scope="col"> ID </th>
-              <th scope="col"> Full name </th>
-              <th scope="col"> Leave Type </th>
-              <th scope="col"> Start Date </th>
-              <th scope="col"> End Date </th>
-              <th scope="col"> Reason </th>
-              <th scope="col"> Status </th>
-              <th scope="col"> Creation Date </th>
-              <th scope="col"> Updation Date </th>
-              
-          </tr>
-
+        <tr>
+          <th scope="col">ID</th>
+          <th scope="col">Full name</th>
+          <th scope="col">Leave Type</th>
+          <th scope="col">Start Date</th>
+          <th scope="col">End Date</th>
+          <th scope="col">Reason</th>
+          <th scope="col">Status</th>
+          <th scope="col">Creation Date</th>
+          <th scope="col">Updation Date</th>
+        </tr>
       </thead>
-
       <tbody>
-
-      {% if rejected_request %}
-
+        {% if rejected_request %}
           {% for record in rejected_request %}
-
-          <tr>
-
-              <td> {{record.id}} </td>
-
-              <td> {{record.full_name}} </td>
-
-              <td> {{record.leave_type}} </td>
-
-              <td> {{record.start_date}} </td>
-              <td> {{record.end_date}} </td>
-              <td> {{record.reason}} </td>
-              <td> 
+            <tr>
+              <td>{{record.id}}</td>
+              <td>{{record.full_name}}</td>
+              <td>{{record.leave_type}}</td>
+              <td>{{record.start_date}}</td>
+              <td>{{record.end_date}}</td>
+              <td>{{record.reason}}</td>
+              <td>
                 {% if record.status == "Rejected" %}
-                <span style="color:red; font-weight: bold;">{{ record.status }}</span>
-            {% elif record.status == "Approved" %}
-                <span style="color:green; font-weight: bold;">{{ record.status }}</span>
-            {% else %}
-                <span style="color:orange; font-weight: bold;">{{ record.status }}</span>
-            {% endif %}
-                
-            </td>
-              <td> {{record.created_at}} </td>
-
-              <td> {{record.updated_at}} </td>
-      
-              
-              
-          </tr>
-
+                  <span style="color:red; font-weight: bold;">{{ record.status }}</span>
+                {% elif record.status == "Approved" %}
+                  <span style="color:green; font-weight: bold;">{{ record.status }}</span>
+                {% else %}
+                  <span style="color:orange; font-weight: bold;">{{ record.status }}</span>
+                {% endif %}
+              </td>
+              <td>{{record.created_at}}</td>
+              <td>{{record.updated_at}}</td>
+            </tr>
           {% endfor %}
-      
-      {% endif %}
-
-
+        {% endif %}
       </tbody>
-
-
-  </table>
-</div>
-{%endblock%}
+    </table>
+  </div>
+{% endblock %}

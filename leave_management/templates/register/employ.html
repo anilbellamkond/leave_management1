@@ -6,7 +6,7 @@
 </head>
 <body>
   {% csrf_token %}
-  <div class="navbar">
+  <div class="navbar" style="background-color:#A1045A;">
     <div class="logo">
       <img src="{%static 'images/Prime Minds.png'%}"/> 
       <h3>Prime Minds</h3>
@@ -17,7 +17,7 @@
     </div>
   </div>
   
-  <div class="sidebar">
+  <div class="sidebar" style="background-color:#A1045A;">
     
     <a href="{% url 'leave_request' employ_detail.id %}">Apply Leave</a>
 

@@ -1,40 +1,38 @@
 
+body {
+    background-color: #f0f0f0;
+}
+
+/* Navbar styling */
 .navbarss {
-    background-color: hsl(324, 50%, 40%);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    color: white;
+    background-color: #007BFF; /* Navbar background color */
+    color: white; /* Text color in the navbar */
+    padding: 10px 0; /* Add some padding for better aesthetics */
 }
 
-/* Styling for the left section (company logo and name) */
-.left-section {
-    display: flex;
-    align-items: center;
-}
-
+/* Logo styling */
 .company-logo img {
-    width: 50px; /* Adjust the size as needed */
-    height: 50px;
-    margin-right: 10px;
+    max-width: 50px;
 }
 
-/* Styling for the right section (employee name and profile picture) */
-.right-section {
-    display: flex;
-    align-items: center;
-}
-
-.employee-details img {
-    width: 40px; /* Adjust the size as needed */
-    height: 40px;
-    border-radius: 50%; /* Makes the image circular for profile pictures */
-    margin-right: 10px;
-}
-
-/* Additional styling for employee name or other elements as needed */
-.employee-name {
+/* Company name styling */
+.company-name {
+    font-size: 20px;
     font-weight: bold;
+    margin-left: 10px; /* Add some space between logo and company name */
 }
 
+/* Right section styling */
+.right-section {
+    margin-right: 10px; /* Add space to the right of the navbar */
+}
+
+/* Employee details in navbar */
+.employee-details {
+    font-size: 18px;
+}
+
+/* Content area styling */
+.content {
+    padding: 20px;
+}

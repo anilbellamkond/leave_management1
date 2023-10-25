@@ -28,6 +28,13 @@ def view_record_update_status(request,id):
         else :
             record_details.status = 'Rejected'
             record_details.save() 
+            send_mail(
+                        "Leave Approved",
+               'Take a leave ',
+        'anilbellamkonda8@gmail.com',
+        [record_details.employee.email],
+        fail_silently=False,
+          )
             
     return render(request,'register/view_update.html',{'record_details':record_details})
 
@@ -56,20 +63,21 @@ def admins(request,id):
     return render(request,'register/admin.html/',{'employ_detail':employ_detail,'p':p,'a':a,'r':r})
  
 
-def pending_request(request):
+def pending_request(request,id):
     pending_request = Leave_Request.objects.filter(status='pending')
     employ_detail = Leave_Request.employee
-    return render(request,'register/prequest.html',{'pending_request':pending_request})
+    employ_details = Employee.objects.get(id=id)
+    return render(request,'register/prequest.html',{'pending_request':pending_request,'id':id,'employ_details':employ_details})
 
-def approved_request(request):
+def approved_request(request,id):
     approved_request = Leave_Request.objects.filter(status='Approved').order_by('-created_at')
-    
-    return render(request,'register/arequest.html',{'approved_request':approved_request,}) 
+    employ_details = Employee.objects.get(id=id)
+    return render(request,'register/arequest.html',{'approved_request':approved_request,'id':id,'employ_details':employ_details}) 
 
-def rejected_request(request):
+def rejected_request(request,id):
     rejected_request = Leave_Request.objects.filter(status='Rejected').order_by('-created_at')
-    
-    return render(request,'register/Rrequest.html',{'rejected_request':rejected_request,})
+    employ_details = Employee.objects.get(id=id)
+    return render(request,'register/Rrequest.html',{'rejected_request':rejected_request,'id':id,'employ_details':employ_details})
 
 
 

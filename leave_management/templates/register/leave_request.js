@@ -46,3 +46,16 @@ document.querySelectorAll('input').forEach(input => {
   });
 });
 
+
+// JavaScript to handle date input placeholders
+document.getElementById("from_date").addEventListener("focus", function() {
+    this.type = "date";
+    this.style.color = "black";
+  this.placeholder='start date' // Set the text color to make it visible
+});
+
+document.getElementById("to_date").addEventListener("focus", function() {
+    this.type = "date";
+    this.style.color = "black";
+    this.placeholder='start date' // Set the text color to make it visible
+});

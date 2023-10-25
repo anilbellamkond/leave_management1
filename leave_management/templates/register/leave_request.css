@@ -76,4 +76,7 @@ body {
   .ins {
     width:500px;
   }
+  .dates {
+    display:flex;
+  }
   
