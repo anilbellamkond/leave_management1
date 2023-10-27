@@ -8,16 +8,32 @@
 {% endblock %}
 
 {% block custom_nav %}
-<div class="employee-name">
-    Hi,&nbsp; {{employ_details.full_name}}   &nbsp;
-    
-</div>
+<span class="nav-item nav-link" style="color: #fff;">{{employ_details.full_name}}</span>
 
 {% endblock %}
+
+{% block a_nav %}
+<a class="nav-link" style="color: #fff;" href="{% url 'arequest' employ_details.id %}">Approved Requests</a>
+
+{% endblock %}
+
+{% block r_nav %}
+                <a class="nav-link" style="color: #fff;" href="{% url 'Rrequest' employ_details.id %}">Rejected Requests</a>
+                {% endblock %}
+    {% block h_nav %}
+                <a class="nav-link" href="{% url 'admins' employ_details.id %}" style="color: #fff;" >Home <span class="sr-only">(current)</span></a>
+    {% endblock %}
+
+
 {% block content %}
-<div class='m-5'>
+<div class='m-2'>
+    <div class="card">
+        <div class="card-header">
+          <h3 class="card-title animated fadeIn" style="text-align: center; font-family:Cambria; font-weight: bold; color:orange">Pending Requests</h3>
+        </div>
+        <div class="card-body">
+          
     
-    <h2>Pending Requests</h2> 
 <table class="table table-hover table-bordered">
 
       <thead class="table-light">
@@ -30,6 +46,7 @@
               <th scope="col"> Start Date </th>
               <th scope="col"> End Date </th>
               <th scope="col"> Reason </th>
+              <th scope="col">File</th>
               <th scope="col"> Status </th>
               <th scope="col"> Creation Date </th>
               <th scope="col"> Updation Date </th>
@@ -55,6 +72,19 @@
               <td> {{record.start_date}} </td>
               <td> {{record.end_date}} </td>
               <td> {{record.reason}} </td>
+              <td><a  href="#" onclick="redirectToFile('{{ record.file }}')">{{record.file}}</a></td> 
+              <script>
+                function redirectToFile(fileUrl) {
+                    // Build the URL without "prequest"
+                    var baseUrl = 'http://127.0.0.1:8000/media/';
+                    var fullUrl = baseUrl + fileUrl;
+                
+                    // Redirect to the URL
+                    window.location.href = fullUrl;
+                }
+                </script>
+                
+
               <td> 
                 {% if record.status == "pending" %}
         <span style="color:orange; font-weight: bold;">{{ record.status }}</span>
@@ -66,7 +96,7 @@
 
               <td> {{record.updated_at}} </td>
       
-              <td> <a class="btn btn-success btn-sm " href="{% url 'view_update' record.id %}"> <i class="fa fa-eye " aria-hidden="true"></i> </a> </td>
+              <td> <a class="btn btn-success btn-sm " href="{% url 'view_update' record.id employ_details.id %}"> <i class="fa fa-eye " aria-hidden="true"></i> </a> </td>
               
           </tr>
 
@@ -79,5 +109,9 @@
 
 
   </table>
+  
+</div>
+</div>
+
 </div>
 {%endblock%}

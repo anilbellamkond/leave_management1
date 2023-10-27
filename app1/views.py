@@ -10,7 +10,9 @@ from django.core.mail import send_mail
 
 
 
-def view_record_update_status(request,id):
+
+def view_record_update_status(request,id,pk):
+    employ_details = Employee.objects.get(id=pk)
     record_details = Leave_Request.objects.get(id=id)
     if request.method == "POST":
         status = request.POST.get('status')
@@ -29,14 +31,15 @@ def view_record_update_status(request,id):
             record_details.status = 'Rejected'
             record_details.save() 
             send_mail(
-                        "Leave Approved",
-               'Take a leave ',
+                        "Leave Rejected",
+               'Sorry ',
         'anilbellamkonda8@gmail.com',
         [record_details.employee.email],
         fail_silently=False,
-          )
-            
-    return render(request,'register/view_update.html',{'record_details':record_details})
+            )
+        
+        return pending_request(request,pk)
+    return render(request,'register/view_update.html',{'record_details':record_details,'employ_details':employ_details})
 
 
 
@@ -94,8 +97,10 @@ def leave_request(request,pk):
         from_date = request.POST.get('from_date')
         to_date = request.POST.get('to_date')
         reason = request.POST.get('reason') 
-        file = request.POST.get('file')
-          
+        file = request.FILES.get('file')
+        
+
+        #print(file)
         leave_req = Leave_Request.objects.create(employee=employee,
                                                  full_name= full_name,
                                                  leave_type=leave_type,
@@ -103,7 +108,6 @@ def leave_request(request,pk):
                                                  end_date=to_date,
                                                  reason = reason,
                                                  file =file,
-                                                 
                                                  status = 'pending')
         
         

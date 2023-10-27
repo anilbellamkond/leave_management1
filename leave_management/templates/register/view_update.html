@@ -1,12 +1,33 @@
 {% extends 'register/baseadmin.html/' %} 
 
+
+
 {% block custom_nav %}
-<div class="employee-name">
-    Hi,&nbsp; {{employ_detail.full_name}}   &nbsp;
-    
-</div>
+
+<span class="nav-item nav-link" style="color: #fff;">{{employ_details.full_name}}</span>
+{% endblock %}
+
+{% block h_nav %}
+                <a class="nav-link" href="{% url 'admins' employ_details.id %}" style="color: #fff;" >Home <span class="sr-only">(current)</span></a>
+    {% endblock %}
+
+
+{% block a_nav %}
+<a class="nav-link" style="color: #fff;" href="{% url 'arequest' employ_details.id %}">Approved Requests</a>
 
 {% endblock %}
+
+{% block p_nav %}
+
+<a class="nav-link" style="color: #fff;" href="{% url 'prequest' employ_details.id %}">Pending Requests</a>
+{% endblock %}
+
+
+{% block r_nav %}
+                <a class="nav-link" style="color: #fff;" href="{% url 'Rrequest' employ_details.id %}">Rejected Requests</a>
+                {% endblock %}
+
+
 
 {% block content %}
 

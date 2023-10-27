@@ -17,6 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path,include
 from app1.views import *
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -29,5 +31,8 @@ urlpatterns = [
     path('prequest/<int:id>',pending_request,name='prequest'),
      path('arequest/<int:id>',approved_request,name='arequest'),
       path('Rrequest/<int:id>',rejected_request,name='Rrequest'),
-    path('view_update/<int:id>',view_record_update_status,name='view_update')
+    path('view_update/<int:id>/<int:pk>',view_record_update_status,name='view_update')
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

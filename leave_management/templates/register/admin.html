@@ -1,11 +1,31 @@
 {% extends 'register/baseadmin.html/' %} 
 
 {% block custom_nav %}
-<div class="employee-name">
-    Hi,&nbsp; {{employ_detail.full_name}}   &nbsp;
-</div>
+
+<span class="nav-item nav-link" style="color: #fff;">{{employ_detail.full_name}}</span>
+{% endblock %}
+
+{% block p_nav %}
+
+<a class="nav-link" style="color: #fff;" href="{% url 'prequest' employ_detail.id %}">Pending Requests</a>
+{% endblock %}
+
+{% block a_nav %}
+<a class="nav-link" style="color: #fff;" href="{% url 'arequest' employ_detail.id %}">Approved Requests</a>
 
 {% endblock %}
+
+{% block r_nav %}
+                <a class="nav-link" style="color: #fff;" href="{% url 'Rrequest' employ_detail.id %}">Rejected Requests</a>
+                {% endblock %}
+
+    {% block h_nav %}
+                <a class="nav-link" href="#" style="color: #fff;" >Home <span class="sr-only">(current)</span></a>
+    {% endblock %}
+
+
+
+
 {% block content %}
 
 <div class="d-flex flex-column justify-content-center mt-5">
@@ -15,7 +35,7 @@
             <div class="card-body">
               <h5 class="card-title">Pending Requests</h5>
               <h2 class="card-text">{{p}}</h2>
-              <a href="{% url 'prequest' employ_detail.id %}" class="btn btn-primary" >Pending Requests</a>
+              <a href="{% url 'prequest' employ_detail.id %}" class="btn btn-warning" >Pending Requests</a>
             </div>
           </div>
 
@@ -31,7 +51,7 @@
             <div class="card-body">
               <h5 class="card-title">Rejected Requests</h5>
               <h2 class="card-text">{{r}}</h2>
-              <a href="{% url 'Rrequest' employ_detail.id %}" class="btn btn-primary">Rejected Requests</a>
+              <a href="{% url 'Rrequest' employ_detail.id %}" class="btn btn-danger">Rejected Requests</a>
             </div>
           </div>
 
