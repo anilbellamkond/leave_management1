@@ -21,6 +21,8 @@
   </div>
   
   <div class="sidebar" style="background-color:#A1045A;">
+
+    <a href="{% url 'employ' employ_detail.id %}">Home</a>
     
     <a href="#">Apply Leave</a>
     <a href="{% url 'leave_history' employ_detail.id  %}">Leave History</a>
@@ -31,21 +33,26 @@
   </div>
   
   <div class="content">
+    <div class="notification" id="notification">
+      Make sure Remaining Team available on that day before apply a leave 
+  </div>
+            
+
            <div class="form-container">
-              <form method="POST" enctype="multipart/form-data" onsubmit="return checkDateDifference()">
+              <form method="POST" enctype="multipart/form-data" onsubmit="return checkCasualLeaveExceed() && checkDateDifference()">
                   {% csrf_token %}
                   <div class="form-group">
                 <label for="ename">
                   Employee Name :
                 </label> 
-                <input type="text" name="employee_name" class="name" id="name" Required> 
+                <input type="text" name="employee_name" class="name" id="ename" Required> 
               </div>
 
               <div class="form-group">
-                <label for="leave_type">
+                <label for="leave_types">
                   Leave Type :
                 </label> 
-                <select name="leave_type" id="leave_type" placeholder="Leave Type" Required>
+                <select name="leave_type" id="leave_types" placeholder="Leave Type" Required>
                   <option value="Casual Leave">Casual Leave</option>
                   <option value="Sick Leave">Sick Leave</option>
                   <option value="Emergency Leave">Emergency Leave</option>
@@ -66,6 +73,8 @@
                 <input type="date" name="to_date" class="name" id="endDate" required> 
               </div>
           </div>
+                  <p style="display:none" id="warning1">Casual Leave cannot exceed more than two days</p>
+
               <div class="form-group">
                 <label for="reason">
                   Reason :

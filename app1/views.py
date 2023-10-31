@@ -5,8 +5,8 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from . models import Employee,Leave_Request
 from django.http import HttpResponse
-from django.contrib import messages
-from django.core.mail import send_mail
+from django.core.mail import send_mail 
+
 
 
 
@@ -65,18 +65,18 @@ def admins(request,id):
     employ_detail = Employee.objects.get(id=id)
     return render(request,'register/admin.html/',{'employ_detail':employ_detail,'p':p,'a':a,'r':r})
  
-
+@login_required
 def pending_request(request,id):
     pending_request = Leave_Request.objects.filter(status='pending')
     employ_detail = Leave_Request.employee
     employ_details = Employee.objects.get(id=id)
     return render(request,'register/prequest.html',{'pending_request':pending_request,'id':id,'employ_details':employ_details})
-
+@login_required
 def approved_request(request,id):
     approved_request = Leave_Request.objects.filter(status='Approved').order_by('-created_at')
     employ_details = Employee.objects.get(id=id)
     return render(request,'register/arequest.html',{'approved_request':approved_request,'id':id,'employ_details':employ_details}) 
-
+@login_required
 def rejected_request(request,id):
     rejected_request = Leave_Request.objects.filter(status='Rejected').order_by('-created_at')
     employ_details = Employee.objects.get(id=id)
@@ -87,6 +87,7 @@ def rejected_request(request,id):
      
 @login_required
 def leave_request(request,pk):
+    
     employ_detail = Employee.objects.get(id=pk) 
     id = employ_detail.id
     if request.method=="POST":
@@ -98,9 +99,7 @@ def leave_request(request,pk):
         to_date = request.POST.get('to_date')
         reason = request.POST.get('reason') 
         file = request.FILES.get('file')
-        
-
-        #print(file)
+         
         leave_req = Leave_Request.objects.create(employee=employee,
                                                  full_name= full_name,
                                                  leave_type=leave_type,
@@ -117,7 +116,7 @@ def leave_request(request,pk):
     return render(request,'register/leave_request.html',{'pk':pk,'employ_detail':employ_detail})
 
 
-
+@login_required
 def leave_history(request,pk):
     employ_detail = Employee.objects.get(id=pk) 
 
@@ -138,10 +137,11 @@ def logins(request):
             login(request,user)
             if user.is_superuser:
                 employ_details = Employee.objects.get(email=email)
-                return admins(request,employ_details.id)
+                return redirect('admins', employ_details.id)
             else :
                 employ_details = Employee.objects.get(email=email)
-                return employee(request,employ_details.id)
+                print(employ_details.id)
+                return redirect('employ', employ_details.id)
       
 
     return render(request, 'register/login.html')

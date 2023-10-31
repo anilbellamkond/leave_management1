@@ -12,7 +12,7 @@
 </head>
 <body>
   {% csrf_token %}
-  <div class="navbar margin-bottom:5px" style="background-color:#A1045A;">
+  <div class="navbar margin-bottom:5px" style="background-color:#A1045A; display:flex; align-items: center;height:100px">
     <div class="logo">
       <img src="{%static 'images/Prime Minds.png'%}"/> 
       <h3>Prime Minds</h3>
@@ -24,6 +24,8 @@
   </div>
   
   <div class="sidebar" style="background-color:#A1045A;">
+
+    <a href="{% url 'employ' employ_detail.id %}">Home</a>
     
     <a href="{% url 'leave_request' employ_detail.id %}">Apply Leave</a>
 
@@ -36,6 +38,13 @@
   </div>
   
   <div class="content">
+    <div class='m-2'>
+    
+      <div class="card">
+          <div class="card-header">
+            <h3 class="card-title animated fadeIn" style="text-align: center; font-family:Cambria; font-weight: bold; color:green">Approved Requests</h3>
+          </div>
+          <div class="card-body" style="overflow-y: scroll; max-height: 500px;"> 
           
     <table class="table table-hover table-bordered">
 
@@ -48,6 +57,7 @@
               <th scope="col"> Leave Type </th>
               <th scope="col"> Start Date </th>
               <th scope="col"> End Date </th>
+              <th scope="col"> Duration </th>
               <th scope="col"> Reason </th>
               <th scope="col"> Status </th>
               <th scope="col"> Creation Date </th>
@@ -73,6 +83,7 @@
 
               <td> {{record.start_date}} </td>
               <td> {{record.end_date}} </td>
+              <td>{{record.get_duration_in_days}} Days</td>
               <td> {{record.reason}} </td>
 
               <td> {% if record.status == "Rejected" %}
@@ -101,7 +112,9 @@
 
   </table>
 
-
+</div>
+</div>
+</div>
 
    
   </div>

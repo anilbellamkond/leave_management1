@@ -39,6 +39,8 @@
           <th scope="col">Leave Type</th>
           <th scope="col">Start Date</th>
           <th scope="col">End Date</th>
+          <th scope="col"> Duration </th>
+          
           <th scope="col">Reason</th>
           <th scope="col">Status</th>
           <th scope="col">Creation Date</th>
@@ -54,6 +56,7 @@
               <td>{{record.leave_type}}</td>
               <td>{{record.start_date}}</td>
               <td>{{record.end_date}}</td>
+              <td>{{record.get_duration_in_days}} Days</td>
               <td>{{record.reason}}</td>
               <td>
                 {% if record.status == "Rejected" %}

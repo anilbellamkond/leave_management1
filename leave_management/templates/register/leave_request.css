@@ -53,11 +53,24 @@ body {
     background-color: #34495e;
   }
   
+
+  .notification {
+    position: fixed;
+    top: 10px; /* Adjust the top value for the desired position */
+    right: 10px; /* Adjust the right value for the desired position */
+    background-color: orange;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    border-radius: 5px;
+    
+}
+
   .content {
     margin-left: 270px;
     padding: 20px;
     display:flex;
-    flex-direction: row;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
   }
