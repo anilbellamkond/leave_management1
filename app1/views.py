@@ -6,7 +6,7 @@ from django.views.decorators.csrf import csrf_exempt
 from . models import Employee,Leave_Request
 from django.http import HttpResponse
 from django.core.mail import send_mail 
-
+from datetime import date
 
 
 
@@ -14,14 +14,23 @@ from django.core.mail import send_mail
 def view_record_update_status(request,id,pk):
     employ_details = Employee.objects.get(id=pk)
     record_details = Leave_Request.objects.get(id=id)
+    
+    approved_leaves = Leave_Request.objects.filter(
+        status='Approved',
+        start_date__lte=record_details.end_date,
+        end_date__gte=record_details.start_date
+    )
     if request.method == "POST":
         status = request.POST.get('status')
+        remark = request.POST.get('remark')
+        record_details.remarks = remark
+        record_details.save()
         if status == "Approve":
            record_details.status = 'Approved'
            record_details.save()
            send_mail(
                         "Leave Approved",
-               'Take a leave ',
+               remark,
         'anilbellamkonda8@gmail.com',
         [record_details.employee.email],
         fail_silently=False,
@@ -32,14 +41,41 @@ def view_record_update_status(request,id,pk):
             record_details.save() 
             send_mail(
                         "Leave Rejected",
-               'Sorry ',
+               remark,
         'anilbellamkonda8@gmail.com',
         [record_details.employee.email],
         fail_silently=False,
             )
         
         return pending_request(request,pk)
-    return render(request,'register/view_update.html',{'record_details':record_details,'employ_details':employ_details})
+    return render(request,'register/view_update.html',{'record_details':record_details,'employ_details':employ_details,'approved_leaves':approved_leaves})
+
+
+def holiday_notification(request,id):
+    employ_details = Employee.objects.get(id=id)
+    if request.method == "POST":
+        holiday_date = request.POST.get('date')
+        message = request.POST.get('message', '')  # Get the message from the form
+        try:
+            # Perform validation and ensure the date is in the correct format.
+            holiday_date = date.fromisoformat(holiday_date)
+            
+            employees = Employee.objects.all()  # Adjust this query to get the relevant employees.
+            for employee in employees:
+                send_mail(
+                    "Holiday Notification",
+                    message,  # Include the message in the email
+                    'anilbellamkonda8@gmail.com',
+                    [employee.email],
+                    fail_silently=False,
+                )
+            return HttpResponse("Holiday marked successfully.")
+        except ValueError:
+            return HttpResponse("Invalid date format or other error.")
+    return render(request,'register/holiday_notification.html',{'employ_details':employ_details})
+
+
+
 
 
 
@@ -83,7 +119,8 @@ def rejected_request(request,id):
     return render(request,'register/Rrequest.html',{'rejected_request':rejected_request,'id':id,'employ_details':employ_details})
 
 
-
+def holiday_calender(request):
+    return render(request,'register/holiday_calender.html')
      
 @login_required
 def leave_request(request,pk):

@@ -1,0 +1,53 @@
+{% extends 'register/baseadmin.html/' %} 
+
+
+
+{% block custom_nav %}
+
+<span class="nav-item nav-link" style="color: #fff;">{{employ_details.full_name}}</span>
+{% endblock %}
+
+{% block h_nav %}
+                <a class="nav-link" href="{% url 'admins' employ_details.id %}" style="color: #fff;" >Home <span class="sr-only">(current)</span></a>
+    {% endblock %}
+
+
+{% block a_nav %}
+<a class="nav-link" style="color: #fff;" href="{% url 'arequest' employ_details.id %}">Approved Requests</a>
+
+{% endblock %}
+
+{% block p_nav %}
+
+<a class="nav-link" style="color: #fff;" href="{% url 'prequest' employ_details.id %}">Pending Requests</a>
+{% endblock %}
+
+
+{% block r_nav %}
+                <a class="nav-link" style="color: #fff;" href="{% url 'Rrequest' employ_details.id %}">Rejected Requests</a>
+                {% endblock %}
+
+
+
+{% block content %}
+
+<div class="container mt-5">
+    <div class="card shadow">
+        <div class="card-body">
+            <form method="POST"> 
+                {%csrf_token%}
+                <p>Holiday Notification</p>
+                    <!-- Replace with the desired date -->
+                    <textarea style="margin-right:20px;padding:5px;" cols="50" rows="5" name="message" placeholder="Enter a Holiday message"></textarea>
+
+               
+               <button type="submit" class="btn btn-outline-success">Send</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
+{% endblock %}

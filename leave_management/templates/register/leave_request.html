@@ -26,7 +26,12 @@
     
     <a href="#">Apply Leave</a>
     <a href="{% url 'leave_history' employ_detail.id  %}">Leave History</a>
-  
+    <a href="{% url 'holiday_calendar' %}" target="_blank">Holiday Calendar</a>
+
+    <a  href="https://anildtimer.ccbp.tech/" target="_blank">Stop Watch &nbsp<i class="fa-solid fa-stopwatch" style="color:#ffff;height:25px;"></i></a>
+
+
+    <a href="https://www.primeminds.co/" target="_blank">About us</a>
  
     <a  href="{% url 'signout'%}">Logout</a>
   
@@ -73,7 +78,7 @@
                 <input type="date" name="to_date" class="name" id="endDate" required> 
               </div>
           </div>
-                  <p style="display:none" id="warning1">Casual Leave cannot exceed more than two days</p>
+                  <p style="display:none; color:orange;" id="warning1">Casual Leave cannot exceed more than two days</p>
 
               <div class="form-group">
                 <label for="reason">

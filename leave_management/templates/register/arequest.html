@@ -45,6 +45,7 @@
               <th scope="col"> Reason </th>
               <th scope="col">File</th>
               <th scope="col"> Status </th>
+              <th scope="col"> Remarks </th>
               <th scope="col"> Creation Date </th>
               <th scope="col"> Updation Date </th>
               
@@ -78,6 +79,8 @@
             {% endif %}
                 
             </td>
+            <td> {{record.remarks}} </td>
+
               <td> {{record.created_at}} </td>
 
               <td> {{record.updated_at}} </td>

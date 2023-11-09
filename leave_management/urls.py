@@ -31,7 +31,9 @@ urlpatterns = [
     path('prequest/<int:id>',pending_request,name='prequest'),
      path('arequest/<int:id>',approved_request,name='arequest'),
       path('Rrequest/<int:id>',rejected_request,name='Rrequest'),
-    path('view_update/<int:id>/<int:pk>',view_record_update_status,name='view_update')
+    path('view_update/<int:id>/<int:pk>',view_record_update_status,name='view_update'),
+    path('holiday_calendar/',holiday_calender,name='holiday_calendar'),
+    path('holiday_notification/<int:id>',holiday_notification,name='holiday_notification'),
 ]
 
 if settings.DEBUG:

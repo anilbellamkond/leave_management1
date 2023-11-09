@@ -4,7 +4,8 @@
 <head>
   <link rel="stylesheet" type="text/css" href="{%static 'employ.css'%}">
   <link rel="stylesheet" type="text/css" href="https://bootswatch.com/5/flatly/bootstrap.min.css">
-
+  <script src="https://kit.fontawesome.com/7184a2fc78.js" crossorigin="anonymous"></script>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
 <style>
@@ -48,7 +49,7 @@
     </div>
 
     <div class="profile">
-      <p>Hi,{{employ_detail.full_name}}</p>&nbsp;
+      <p>Hi,&nbsp; {{employ_detail.full_name.capitalize}} &nbsp;</p>&nbsp;
     </div>
   </div>
   
@@ -60,6 +61,12 @@
 
 
     <a href="{% url 'leave_history' employ_detail.id  %}">Leave History</a>
+
+    <a href="{% url 'holiday_calendar' %}" target="_blank">Holiday Calendar</a>
+
+    <a  href="https://anildtimer.ccbp.tech/" target="_blank">Stop Watch &nbsp<i class="fa-solid fa-stopwatch" style="color:#ffff;height:25px;"></i></a>
+
+    <a href="https://www.primeminds.co/" target="_blank">About us</a>
   
  
     <a  href="{% url 'signout'%}">Logout</a>
@@ -67,46 +74,81 @@
   </div>
   
   <div class="content" style="display: flex;flex-wrap: wrap;justify-content: space-between;">
+    <style>
+      .card {
+          transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+      }
+  
+      .card:hover {
+          transform: scale(1.05); /* Enlarge the card on hover */
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add a shadow on hover */
+          background-color: #f7f7f7; /* Change the background color on hover */
+          transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;
+      }
+  
+      .card-title {
+          font-size: 20px;
+      }
+  
+      /* Blinking animation */
+      @keyframes blink {
+          0% {
+              opacity: 1;
+          }
+          50% {
+              opacity: 0;
+          }
+          100% {
+              opacity: 1;
+          }
+      }
+  
+      .blink {
+          animation: blink 1s infinite;
+          color: orange;
+      }
+  </style>
+  
     <!-- Your dashboard content goes here -->
     <div class="card text-center m-3 bg-info" style="width: 18rem;">
       <div class="card-body">
-        <h5 class="card-title">Casual Leaves Taken</h5>
-        <h2 class="card-text">{{employ_detail.total_casual_leave_days}}/24</h2>
+        <h5 class="card-title text-white">Casual Leaves Taken</h5>
+        <h2 class="card-text text-white">{{employ_detail.total_casual_leave_days}}/10</h2>
       </div>
     </div>
  
   <div class="card text-center m-3 bg-success" style="width: 18rem;">
     <div class="card-body">
-      <h5 class="card-title">Sick Leaves Taken</h5>
-      <h2 class="card-text">{{employ_detail.total_sick_leave_days}}</h2>
+      <h5 class="card-title text-white">Sick Leaves Taken</h5>
+      <h2 class="card-text text-white">{{employ_detail.total_sick_leave_days}}/10</h2>
     </div>
   </div>
 
   <div class="card text-center m-3 bg-warning" style="width: 18rem;">
     <div class="card-body">
-      <h5 class="card-title">Emergency Leaves Taken</h5>
-      <h2 class="card-text">{{employ_detail.total_emergency_leave_days}}</h2>
+      <h5 class="card-title text-white">Emergency Leaves Taken</h5>
+      <h2 class="card-text text-white">{{employ_detail.total_emergency_leave_days}}/5</h2>
     </div>
   </div>  
 
   <div class="card text-center m-3 bg-secondary" style="width: 18rem;">
     <div class="card-body">
-      <h5 class="card-title">Total Leaves Taken</h5>
-      <h2 class="card-text">{{employ_detail.total_leaves_taken}}</h2>
-    </div>
-  </div>
-
-  <div class="card text-center m-3 bg-body-tertiary" style="width: 18rem;">
-    <div class="card-body">
-      <h5 class="card-title">Remaining leave needs to be taken</h5>
-      <h2 class="card-text">{{employ_detail.remaining_casual_leave}}</h2>
+      <h5 class="card-title text-white">Total Leaves Taken</h5>
+      <h2 class="card-text text-white">{{employ_detail.total_leaves_taken}}</h2>
     </div>
   </div>
 
   <div class="card text-center m-3 bg-danger" style="width: 18rem;">
     <div class="card-body">
-      <h5 class="card-title">Total Casual Leaves Per Annuam</h5>
-      <h2 class="card-text">24</h2>
+      <h5 class="card-title text-white">Remaining leave needs to be taken</h5>
+      <h2 class="card-text text-white">{{employ_detail.remaining_casual_leave}}</h2>
+    </div>
+  </div>
+
+  <div class="card text-center m-3 bg-danger" style="width: 18rem;">
+    <div class="card-body">
+      <h5 class="card-title text-white">Total  Leaves Per Annuam</h5>
+      <h2 class="card-text text-white">25</h2>
     </div>
   </div>
 

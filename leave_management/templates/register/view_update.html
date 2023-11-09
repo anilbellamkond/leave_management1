@@ -34,49 +34,90 @@
 <div class="container mt-5">
     <div class="card shadow">
         <div class="card-body">
-            <form method="POST"> 
-                {%csrf_token%}
-                <p class="form-group">
-                    <label for="employee_name">Full Name:</label>
-                    <input type="text" class="form-control" id="employee_name" name="{{ record_details.full_name }}" value="{{ record_details.full_name }}" readonly placeholder="Employee Name">
-                </p>
-                <p class="form-group">
-                    <label for="leave_type">Leave Type:</label>
-                    <select class="form-control" id="leave_type" name="leave_type" disabled>
-                        <option value="Casual Leave" {% if record_details.leave_type == "Casual Leave" %}selected{% endif %}>Casual Leave</option>
-                        <option value="Sick Leave" {% if record_details.leave_type == "Sick Leave" %}selected{% endif %}>Sick Leave</option>
-                        <option value="Emergency Leave" {% if record_details.leave_type == "Emergency Leave" %}selected{% endif %}>Emergency Leave</option>
-                    </select>
-                </p>
-                <p class="form-group">
-                    <label for="from_date">Start Date:</label>
-                    <input type="date" class="form-control" id="from_date" value="{{ record_details.start_date|date:'Y-m-d' }}" name="from_date" readonly>
-                </p>
-                <p class="form-group">
-                    <label for="to_date">End Date:</label>
-                    <input type="date" class="form-control" id="to_date" value="{{ record_details.end_date|date:'Y-m-d' }}" name="to_date" readonly>
-                </p>
-                <p class="form-group">
-                    <label for="reason">Reason:</label>
-                    <textarea class="form-control" id="reason" name="reason" readonly placeholder="Reason for leave">{{ record_details.reason }}</textarea>
-                </p>
-                
-                <div class="btn-group">
-                    <label for="status">Status: &nbsp</label>
-                    <select class="form-control" id="status" name="status">
-                        <option value="TakeAction">Take Action</option>
-                        <option value="Approve">Approve</option>
-                        <option value="Reject">Reject</option>
-                    </select>
+            <div class="row">
+                <!-- Left side (Form) -->
+                <div class="col-md-6">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <p class="form-group">
+                            <label for="employee_name">Full Name:</label>
+                            <input type="text" class="form-control" id="employee_name" name="{{ record_details.full_name }}" value="{{ record_details.full_name }}" readonly placeholder="Employee Name">
+                        </p>
+                        <p class="form-group">
+                            <label for="leave_type">Leave Type:</label>
+                            <select class="form-control" id="leave_type" name="leave_type" disabled>
+                                <option value="Casual Leave" {% if record_details.leave_type == "Casual Leave" %}selected{% endif %}>Casual Leave</option>
+                                <option value="Sick Leave" {% if record_details.leave_type == "Sick Leave" %}selected{% endif %}>Sick Leave</option>
+                                <option value="Emergency Leave" {% if record_details.leave_type == "Emergency Leave" %}selected{% endif %}>Emergency Leave</option>
+                            </select>
+                        </p>
+                        <p class="form-group">
+                            <label for="from_date">Start Date:</label>
+                            <input type="date" class="form-control" id="from_date" value="{{ record_details.start_date|date:'Y-m-d' }}" name="from_date" readonly>
+                        </p>
+                        <p class="form-group">
+                            <label for="to_date">End Date:</label>
+                            <input type="date" class="form-control" id="to_date" value="{{ record_details.end_date|date:'Y-m-d' }}" name="to_date" readonly>
+                        </p>
+                        <p class="form-group">
+                            <label for="reason">Reason:</label>
+                            <textarea class="form-control" id="reason" name="reason" readonly placeholder="Reason for leave">{{ record_details.reason }}</textarea>
+                        </p>
+                        <div style="display: flex; ">
+                            <div class="btn-group">
+                                <label for="status">Status:</label>
+                                <select class="form-control" id="status" name="status">
+                                    <option value="TakeAction">Take Action</option>
+                                    <option value="Approve">Approve</option>
+                                    <option value="Reject">Reject</option>
+                                </select>
+                            </div>
+                            <div style="margin-left: 20px;"> <!-- Add margin to create a gap -->
+                                <label for="reason">Remarks:</label>
+                                <textarea class="form-control" id="remark" name="remark" placeholder="Remarks"></textarea>
+                            </div>
+                        </div>
+                        <br/>
+                        <br/>
+                        <button type="submit" class="btn btn-outline-success">Submit</button>
+                    </form>
                 </div>
-                <br/>
-                <br/>
-               <button type="submit" class="btn btn-outline-success">Submit</button>
-            </form>
+                <!-- Right side (Approved Leave Records) -->
+                <div class="col-md-6" style="overflow-y: scroll; max-height: 500px;">
+                    <p>Approved Leave Records:</p>
+                    <table class="table table-hover table-bordered">
+                        <thead class="table-light">
+                            <tr>
+                                <th scope="col">Employee Name</th>
+                                <th scope="col">Leave Type</th>
+                                <th scope="col">Start Date</th>
+                                <th scope="col">End Date</th>
+                                <th scope="col">Duration</th>
+                                <th scope="col">Reason</th>
+                                <!-- Add any other table headers you want -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for leave in approved_leaves %}
+                            <tr>
+                                <td>{{ leave.employee.full_name }}</td>
+                                <td>{{ leave.leave_type }}</td>
+                                <td>{{ leave.start_date|date:'d-m-Y' }}</td>
+                                <td>{{ leave.end_date|date:'d-m-Y' }}</td>
+                                <td>{{ leave.get_duration_in_days}}</td>
+                                <td>{{ leave.reason }}</td>
+                                <!-- Add any other table cells you want -->
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
-
 
 
 

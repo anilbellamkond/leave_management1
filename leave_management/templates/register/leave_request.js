@@ -45,8 +45,10 @@ document.addEventListener('DOMContentLoaded', function() {
   function checkDateDifference() {
     if (isDateDifferenceGreaterThan3Days(startDateInput.value, endDateInput.value)) {
       fileInput.style.display = 'block';
+     fileInput.required = true;
     } else {
       fileInput.style.display = 'none';
+      fileInput.required = false;
     }
 
     if(isDateDifferenceGreaterThan2Days(startDateInput.value, endDateInput.value) && leaveTypeInput.value === "Casual Leave" ){
@@ -57,12 +59,14 @@ document.addEventListener('DOMContentLoaded', function() {
       warning1.style.display = 'none';
     }
 
+    console.log(leaveTypeInput.value)
+
     return true;
   }
 
   endDateInput.addEventListener('change', checkDateDifference);
   startDateInput.addEventListener('change', checkDateDifference);
-  leaveTypeInput.addEventListener('change', checkCasualLeaveExceed);
+  leaveTypeInput.addEventListener('change', checkDateDifference);
   endDateInput.addEventListener('change', checkStartDateVsEndDate);
 });
 

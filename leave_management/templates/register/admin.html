@@ -1,60 +1,110 @@
-{% extends 'register/baseadmin.html/' %} 
+{% extends 'register/baseadmin.html/' %}
 
 {% block custom_nav %}
-
 <span class="nav-item nav-link" style="color: #fff;">{{employ_detail.full_name}}</span>
 {% endblock %}
 
 {% block p_nav %}
-
 <a class="nav-link" style="color: #fff;" href="{% url 'prequest' employ_detail.id %}">Pending Requests</a>
 {% endblock %}
 
 {% block a_nav %}
 <a class="nav-link" style="color: #fff;" href="{% url 'arequest' employ_detail.id %}">Approved Requests</a>
-
 {% endblock %}
 
 {% block r_nav %}
-                <a class="nav-link" style="color: #fff;" href="{% url 'Rrequest' employ_detail.id %}">Rejected Requests</a>
-                {% endblock %}
+<a class="nav-link" style="color: #fff;" href="{% url 'Rrequest' employ_detail.id %}">Rejected Requests</a>
+{% endblock %}
 
-    {% block h_nav %}
-                <a class="nav-link" href="#" style="color: #fff;" >Home <span class="sr-only">(current)</span></a>
-    {% endblock %}
-
-
-
+{% block h_nav %}
+<a class="nav-link" href="#" style="color: #fff;">Home <span class="sr-only">(current)</span></a>
+{% endblock %}
 
 {% block content %}
-
 <div class="d-flex flex-column justify-content-center mt-5">
-       <div class="d-flex flex-row justify-content-center">
-       
-        <div class="card text-center m-3 bg-" style="width: 18rem;">
-            <div class="card-body">
-              <h5 class="card-title">Pending Requests</h5>
-              <h2 class="card-text">{{p}}</h2>
-              <a href="{% url 'prequest' employ_detail.id %}" class="btn btn-warning" >Pending Requests</a>
-            </div>
-          </div>
+    <div class="d-flex flex-row justify-content-center">
+      <style>
+        .card {
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+    
+        .card:hover {
+            transform: scale(1.05); /* Enlarge the card on hover */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Add a shadow on hover */
+            background-color: #f7f7f7; /* Change the background color on hover */
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out, background-color 0.3s ease-in-out;
+        }
+    
+        .card-title {
+            font-size: 20px;
+        }
+    
+        /* Blinking animation */
+        @keyframes blink {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+    
+        .blink {
+            animation: blink 1s infinite;
+            color: orange;
+        }
+    
+            @keyframes blink {
+                0% {
+                    opacity: 1;
+                }
+                50% {
+                    opacity: 0;
+                }
+                100% {
+                    opacity: 1;
+                }
+            }
 
-          <div class="card text-center m-3 " style="width: 18rem;">
+            .blink {
+                animation: blink 1s infinite;
+                color: orange;
+            }
+        </style>
+        <div class="card text-center m-3 bg-primary" style="width: 18rem;">
             <div class="card-body">
-              <h5 class="card-title">Approved Requests</h5>
-              <h2 class="card-text">{{a}}</h2>
-              <a href="{% url 'arequest' employ_detail.id %}" class="btn btn-success">Approved Requests</a>
+                <h5 class="card-title text-white">Pending Requests</h5>
+                <h2 class="card-text {% if p > 0 %}blink{% endif %}">{{p}}</h2>
+                <a href="{% url 'prequest' employ_detail.id %}" class="btn btn-warning">Pending Requests</a>
             </div>
-          </div>
+        </div>
 
-          <div class="card text-center m-3  " style="width: 18rem;">
+        <div class="card text-center m-3 bg-info" style="width: 18rem;">
             <div class="card-body">
-              <h5 class="card-title">Rejected Requests</h5>
-              <h2 class="card-text">{{r}}</h2>
-              <a href="{% url 'Rrequest' employ_detail.id %}" class="btn btn-danger">Rejected Requests</a>
+                <h5 class="card-title text-white">Approved Requests</h5>
+                <h2 class="card-text text-white">{{a}}</h2>
+                <a href="{% url 'arequest' employ_detail.id %}" class="btn btn-success">Approved Requests</a>
             </div>
-          </div>
+        </div>
 
+        <div class="card text-center m-3 bg-secondary" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title text-white">Rejected Requests</h5>
+                <h2 class="card-text text-white">{{r}}</h2>
+                <a href="{% url 'Rrequest' employ_detail.id %}" class="btn btn-danger">Rejected Requests</a>
+            </div>
+        </div>
+
+        <div class="card text-center m-3 bg-dark" style="width: 18rem;">
+            <div class="card-body">
+                <h5 class="card-title text-white">Holiday Notification</h5>
+                <h2 class="card-text text-white">Message</h2>
+                <a href="{% url 'holiday_notification' employ_detail.id %}" class="btn btn-danger">Send Notification</a>
+            </div>
         </div>
     </div>
+</div>
 {% endblock %}

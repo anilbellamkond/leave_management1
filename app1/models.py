@@ -1,5 +1,6 @@
 from django.db import models
 import datetime 
+from django.utils import timezone
 
 
 
@@ -15,9 +16,9 @@ class Employee(models.Model):
 
     address = models.CharField(max_length=300) 
 
-    creation_date = models.DateTimeField(auto_now_add=True) 
+    creation_date = models.DateTimeField(auto_now_add=True,) 
 
-    casual_leave_entitlement = models.IntegerField(default=24)
+    casual_leave_entitlement = models.IntegerField(default=10)
 
     def total_leave_days(self, leave_type):
         total_days = 0
@@ -62,6 +63,7 @@ class Leave_Request(models.Model):
     reason = models.TextField()  
     file = models.FileField(upload_to='uploads/')
     status = models.CharField(max_length=255, choices=[('Pending', 'Pending'), ('Approved', 'Approved'), ('Rejected', 'Rejected')], default='Pending')
+    remarks = models.TextField(blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

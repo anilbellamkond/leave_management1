@@ -31,8 +31,15 @@
 
 
     <a href="#">Leave History</a>
+
+    <a href="{% url 'holiday_calendar' %}" target="_blank">Holiday Calendar</a>
+
+    <a  href="https://anildtimer.ccbp.tech/" target="_blank">Stop Watch &nbsp<i class="fa-solid fa-stopwatch" style="color:#ffff;height:25px;"></i></a>
+
+
+    <a href="https://www.primeminds.co/" target="_blank">About us</a>
   
- 
+   
     <a  href="{% url 'signout'%}">Logout</a>
   
   </div>
@@ -42,7 +49,7 @@
     
       <div class="card">
           <div class="card-header">
-            <h3 class="card-title animated fadeIn" style="text-align: center; font-family:Cambria; font-weight: bold; color:green">Approved Requests</h3>
+            <h3 class="card-title animated fadeIn" style="text-align: center; font-family:Cambria; font-weight: bold; color:green">Leave History</h3>
           </div>
           <div class="card-body" style="overflow-y: scroll; max-height: 500px;"> 
           
@@ -60,6 +67,7 @@
               <th scope="col"> Duration </th>
               <th scope="col"> Reason </th>
               <th scope="col"> Status </th>
+              <th scope="col"> Remarks </th>
               <th scope="col"> Creation Date </th>
               <th scope="col"> Updation Date </th>
 
@@ -94,7 +102,8 @@
                 <span style="color:orange; font-weight: bold;">{{ record.status }}</span>
             {% endif %}
                  </td>
-
+              
+              <td> {{record.remarks}} </td>
               <td> {{record.created_at}} </td>
 
               <td> {{record.updated_at}} </td>
